@@ -2,28 +2,33 @@ const { gql } = require("apollo-server-express")
 
 const user = gql`
     scalar Date
-    enum Role {
-        USER
-        PRO
-        ADMIN
-    }
+
     type User {
         ID: ID!
         email: String!
-        membership: Date
-        role: Role!
+        role: [String!]
         info: UserInfo
-        clients: [User]
     }
-    
-    type UserInfo {
-        fullName: String!
-        birthDate: Date!
-        height: Float!
-        weigth: Float!
-        gender: String!
+    type Address {
         country: String
-        phoneNumber: [String!]
+        city: String
+        streetAddr: String
+        postalNumber: String
+    }
+    type Contact {
+        contactType: String
+        contactValue: String
+    }
+
+    type UserInfo {
+        addresses: [Address]
+        contacts: [Contact]
+        fullName: String
+        birthDate: Date
+        height: Float
+        weigth: Float
+        gender: String
+        country: String
     }
     extend type Query {
         users: [User]

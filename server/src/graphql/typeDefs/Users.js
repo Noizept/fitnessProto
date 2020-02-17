@@ -1,5 +1,6 @@
 const { gql } = require("apollo-server-express")
 
+//7026
 const user = gql`
     scalar Date
 
@@ -31,7 +32,8 @@ const user = gql`
         country: String
     }
     extend type Query {
-        users: [User]
+        getAllUsers: [User]
+        loginUser(email: String!, password: String!): String
     }
     extend type Mutation {
         registerUser(email: String!, password: String!): User!

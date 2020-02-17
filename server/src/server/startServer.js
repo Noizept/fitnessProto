@@ -1,8 +1,12 @@
 const { ApolloServer } = require("apollo-server-express")
 const typeDefs = require("../graphql/typeDefs")
+const resolvers = require("../graphql/resolvers")
 const express = require("express")
+const bodyParser = require("body-parser")
 
 const app = express()
+app.use("/graphql", bodyParser.json())
+
 const server = new ApolloServer({
     context: async ({ req, res }) => {
         //Can check headers here
@@ -10,7 +14,7 @@ const server = new ApolloServer({
         //  console.log(res)
     },
     typeDefs: typeDefs,
-    resolvers: {},
+    resolvers: resolvers,
     playground: true
 })
 

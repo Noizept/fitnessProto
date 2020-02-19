@@ -4,6 +4,7 @@
         [
             "import",
             { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }
-        ] // `style: true` for less
+        ], // `style: true` for less,
+        "babel-plugin-styled-components"
     ]
 }

@@ -4,10 +4,13 @@ import React from "react"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
 import ReactDOM from "react-dom"
 import { ApolloProvider } from "react-apollo"
-import App from "./components/App"
 import * as theme from "./theme"
 import store from "./store"
 import graphqlClient from "./api/graphqlClient"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
+
+import App from "./components/App"
+import Login from "./components/Authentication/Login"
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
@@ -26,7 +29,12 @@ ReactDOM.render(
         <ApolloProvider client={graphqlClient}>
             <ThemeProvider theme={theme}>
                 <GlobalStyle />
-                <App />
+                <BrowserRouter>
+                    <Switch>
+                        <Route component={Login} path="/login" />
+                        <Route component={Login} path="/" />
+                    </Switch>
+                </BrowserRouter>
             </ThemeProvider>
         </ApolloProvider>
     </Provider>,

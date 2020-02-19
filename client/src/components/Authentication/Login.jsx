@@ -1,15 +1,8 @@
 import React from "react"
 import { useForm } from "react-hook-form"
-import { Form, Input, Icon, Tooltip, Row } from "antd"
+import { Form, Input, Icon, Tooltip, Row, Button } from "antd"
 import styled from "styled-components"
 
-const LoginRow = styled.div`
-    display: flex;
-    height: 100%;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-`
 const FormWrapper = styled.form`
     display: flex;
     height: 100%;
@@ -25,7 +18,9 @@ const Login = () => {
     return (
         <FormWrapper onSubmit={handleSubmit(onSubmit)}>
             <Input
-                type="email"
+                name="email"
+             type="email"
+                ref={register({ required: true })}
                 placeholder="Enter your username"
                 prefix={<Icon type="mail" theme="twoTone" />}
                 suffix={
@@ -34,6 +29,9 @@ const Login = () => {
                     </Tooltip>
                 }
             />
+            <Button type="submit" htmlType="submit">
+                aaa
+            </Button>
         </FormWrapper>
     )
 }

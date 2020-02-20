@@ -1,5 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin")
-
+const path = require("path")
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
     template: "./index.html",
     filename: "./index.html"
@@ -23,8 +23,14 @@ module.exports = {
             }
         ]
     },
-    resolve:{
-        extensions: ['*', '.js', '.jsx']
+    resolve: {
+        extensions: ["*", ".js", ".jsx"]
+    },
+    devServer: {
+        historyApiFallback: {
+            index: "/"
+        },
+        port: 9000
     },
     plugins: [htmlWebpackPlugin]
 }

@@ -1,15 +1,16 @@
 const CLEAR = "JWT/CLEAR"
-const DEFAULT_STATE = localStorage.getItem('jwtToken')
+const DEFAULT_STATE = `Bearer ${localStorage.getItem("jwtToken")}`
 const SET = "JWT/SET"
 
 const jwtReducer = (state = DEFAULT_STATE, action = {}) => {
     switch (action.type) {
         case SET:
-            return action.jwt
+            localStorage.setItem("jwtToken", `${action.jwt}`)
+            return `Bearer ${action.jwt}`
         case CLEAR:
+            localStorage.removeItem("jwtToken")
             return null
     }
-
     return state
 }
 

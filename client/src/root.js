@@ -3,7 +3,7 @@ import { Provider } from "react-redux"
 import React from "react"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
 import ReactDOM from "react-dom"
-import { ApolloProvider } from "react-apollo"
+import { ApolloProvider } from "@apollo/react-hooks"
 import * as theme from "./theme"
 import store from "./store"
 import graphqlClient from "./api/graphqlClient"
@@ -32,7 +32,7 @@ ReactDOM.render(
                 <BrowserRouter>
                     <Switch>
                         <Route component={Login} path="/login" />
-                        <Route component={Login} path="/" />
+                        <Route component={App} path="/" />
                     </Switch>
                 </BrowserRouter>
             </ThemeProvider>

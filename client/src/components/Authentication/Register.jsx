@@ -1,84 +1,50 @@
-import { Form, Icon, Input, Button, Checkbox } from "antd"
+import React from "react"
+import RegisterForm from "./RegisterForm"
+import { useMutation } from "@apollo/react-hooks"
+import gql from "graphql-tag"
+import { notification } from "antd"
+import { Redirect } from "react-router-dom"
 
-class NormalLoginForm extends React.Component {
-    handleSubmit = e => {
-        e.preventDefault()
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log("Received values of form: ", values)
-            }
-        })
+const REGISTERUSER = gql`
+    mutation RegisterUser($input: UserRegisterInput!) {
+        registerUser(userInput: $input) {
+            ID
+        }
+    }
+`
+
+const Register = () => {
+    const [registerUser] = useMutation(REGISTERUSER)
+
+    const onSubmit = async data => {
+        delete data.password2
+        try {
+            const result = await registerUser({
+                variables: {
+                    input: data
+                }
+            })
+            notification["success"]({
+                message: "registered",
+                description: `${result.data.registerUser.ID}`
+            })
+            setTimeout(() => {
+                return <Redirect to="/login" />
+            }, 3000)
+        } catch (er) {
+            notification["error"]({
+                message: "Failed register",
+                description:
+                    "This is the content of the notification. This is the content of the notification. This is the content of the notification."
+            })
+        }
     }
 
-    render() {
-        const { getFieldDecorator } = this.props.form
-        return (
-            <Form onSubmit={this.handleSubmit} className="login-form">
-                <Form.Item>
-                    {getFieldDecorator("username", {
-                        rules: [
-                            {
-                                required: true,
-                                message: "Please input your username!"
-                            }
-                        ]
-                    })(
-                        <Input
-                            prefix={
-                                <Icon
-                                    type="user"
-                                    style={{ color: "rgba(0,0,0,.25)" }}
-                                />
-                            }
-                            placeholder="Username"
-                        />
-                    )}
-                </Form.Item>
-                <Form.Item>
-                    {getFieldDecorator("password", {
-                        rules: [
-                            {
-                                required: true,
-                                message: "Please input your Password!"
-                            }
-                        ]
-                    })(
-                        <Input
-                            prefix={
-                                <Icon
-                                    type="lock"
-                                    style={{ color: "rgba(0,0,0,.25)" }}
-                                />
-                            }
-                            type="password"
-                            placeholder="Password"
-                        />
-                    )}
-                </Form.Item>
-                <Form.Item>
-                    {getFieldDecorator("remember", {
-                        valuePropName: "checked",
-                        initialValue: true
-                    })(<Checkbox>Remember me</Checkbox>)}
-                    <a className="login-form-forgot" href="">
-                        Forgot password
-                    </a>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="login-form-button"
-                    >
-                        Log in
-                    </Button>
-                    Or <a href="">register now!</a>
-                </Form.Item>
-            </Form>
-        )
-    }
+    return (
+        <div>
+            <RegisterForm onSubmit={onSubmit} />
+        </div>
+    )
 }
 
-const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(
-    NormalLoginForm
-)
-
-export default NormalLoginForm
+export default Register

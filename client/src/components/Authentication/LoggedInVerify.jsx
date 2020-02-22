@@ -2,7 +2,6 @@ import React, { Fragment } from "react"
 import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { Redirect } from "react-router-dom"
-import Login from "./Login"
 
 export const MYSELF = gql`
     {

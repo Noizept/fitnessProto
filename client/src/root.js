@@ -11,6 +11,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 import App from "./components/App"
 import Login from "./components/Authentication/Login"
+import Register from "./components/Authentication/Register"
+import Dashboard from "./components/Dashboard/Dashboard"
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
@@ -31,6 +33,8 @@ ReactDOM.render(
                 <GlobalStyle />
                 <BrowserRouter>
                     <Switch>
+                        <Route component={Dashboard} path="/dashboard" />
+                        <Route component={Register} path="/signup" />
                         <Route component={Login} path="/login" />
                         <Route component={App} path="/" />
                     </Switch>

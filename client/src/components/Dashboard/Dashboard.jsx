@@ -2,6 +2,7 @@ import React, { useState } from "react"
 
 import { Layout, Menu, Icon } from "antd"
 const { Header, Sider, Footer, Content } = Layout
+import LoginVerify from "../Authentication/LoggedInVerify"
 
 export default function App() {
     const [isCollapsed, setCollapsed] = useState(false)
@@ -10,6 +11,7 @@ export default function App() {
     }
     return (
         <div>
+            <LoginVerify />
             <Layout>
                 <Sider
                     style={{ minHeight: "100vh" }}

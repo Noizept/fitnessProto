@@ -13,6 +13,8 @@ import App from "./components/App"
 import Login from "./components/Authentication/Login"
 import Register from "./components/Authentication/Register"
 import Dashboard from "./components/Dashboard/Dashboard"
+import Logout from "./components/Authentication/Logout"
+
 import LoggedInVerify from "./components/Authentication/LoggedInVerify"
 
 const GlobalStyle = createGlobalStyle`
@@ -34,7 +36,7 @@ ReactDOM.render(
                 <GlobalStyle />
                 <BrowserRouter>
                     <Switch>
-                        <Route component={LoggedInVerify} path="/testme" />
+                        <Route component={Logout} path="/logout" />
                         <Route component={Dashboard} path="/dashboard" />
                         <Route component={Register} path="/signup" />
                         <Route component={Login} path="/login" />

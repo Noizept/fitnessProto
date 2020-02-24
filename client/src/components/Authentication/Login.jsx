@@ -69,8 +69,8 @@ export default function Login(props) {
                     <Button type="primary" htmlType="submit">
                         Login
                     </Button>
-                    <Button type="link">
-                        {<Link to="/signup"></Link>}Signup
+                    <Button type="link" href="/signup">
+                        Signup
                     </Button>
                     <br />
                     <Button type="link">Forgot password?</Button>

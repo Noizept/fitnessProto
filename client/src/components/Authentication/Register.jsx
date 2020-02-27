@@ -14,6 +14,8 @@ const REGISTERUSER = gql`
 `
 
 const Register = () => {
+    if (window.localStorage.getItem("jwtToken"))
+        return <Redirect to="/dashboard" />
     const [registerUser] = useMutation(REGISTERUSER)
 
     const onSubmit = async data => {

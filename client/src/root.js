@@ -8,17 +8,18 @@ import * as theme from "./theme"
 import store from "./store"
 import graphqlClient from "./api/graphqlClient"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
+import ProtectedRoute from "./AuthRouting/ProtectedRoute"
+import PrivateRoute from "./AuthRouting/PrivateRoute"
 
 import App from "./components/App"
 import Login from "./components/Authentication/Login"
 import Register from "./components/Authentication/Register"
 import Dashboard from "./components/Dashboard/Dashboard"
 import Logout from "./components/Authentication/Logout"
-
-import LoggedInVerify from "./components/Authentication/LoggedInVerify"
+import Admin from "./components/Admin/Admin"
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
     html,body,#app{
         font-family: 'Roboto', sans-serif !important;
         width:100%;
@@ -36,8 +37,17 @@ ReactDOM.render(
                 <GlobalStyle />
                 <BrowserRouter>
                     <Switch>
+                        <ProtectedRoute
+                            component={Dashboard}
+                            path="/dashboard"
+                        />
+                        <PrivateRoute
+                            component={Admin}
+                            path="/admin"
+                            role="ADMIN"
+                        />
+
                         <Route component={Logout} path="/logout" />
-                        <Route component={Dashboard} path="/dashboard" />
                         <Route component={Register} path="/signup" />
                         <Route component={Login} path="/login" />
                         <Route component={App} path="/" />

@@ -1,38 +1,22 @@
-import graphqlClient from "./graphqlClient"
-import gql from "graphql-tag"
 import _ from "lodash"
 
-const MYSELF = gql`
-    {
-        myself {
-            ID
-            role
-        }
-    }
-`
-
 export default class AuthHelper {
-    static async isAuthorized({ role }) {
-        if (!localStorage.getItem("jwtToken")) return false
+    static isAuthorized({ role, user }) {
+        return _.includes(user.roles, role) ? true : false
+    }
 
-        try {
-            const { data } = await graphqlClient.query({
-                query: MYSELF,
-                context: {
-                    headers: {
-                        authorization: localStorage.getItem("jwtToken")
-                    }
-                }
-            })
-            return _.includes(data.myself.role, role) ? true : false
-        } catch (error) {
-            console.log(error)
+    static isLogged({ user }) {
+        if (!localStorage.getItem("jwtToken")) return false
+        if (!user) return false
+
+        const [TOKEN_EXP, CURRENT_DATE] = [
+            new Date(user.exp * 1000),
+            new Date()
+        ]
+        if (TOKEN_EXP < CURRENT_DATE) {
+            localStorage.removeItem("jwtToken")
             return false
         }
-    }
-
-    static isLogged() {
-        if (!localStorage.getItem("jwtToken")) return false
         return true
     }
 }

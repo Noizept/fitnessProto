@@ -1,5 +1,5 @@
 import React from "react"
-import RegisterForm from "./RegisterForm"
+import RegisterForm from "../../Forms/auth/RegisterForm"
 import { useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { notification } from "antd"

@@ -5,9 +5,9 @@ import { useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { Input, Icon, Form, Button, notification } from "antd"
 import styled from "styled-components"
-import imageLogo from "../../imgs/Login/physiotherapy-595529_640.jpg"
+import imageLogo from "../../../imgs/Login/physiotherapy-595529_640.jpg"
 import { useDispatch } from "react-redux"
-import { setUser } from "../../store/ducks/user"
+import { setUser, clearUser } from "../../../store/ducks/user"
 import jwtDecode from "jwt-decode"
 
 const ImageWrapper = styled.img`

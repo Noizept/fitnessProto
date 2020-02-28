@@ -7,16 +7,7 @@ import { ApolloProvider } from "@apollo/react-hooks"
 import * as theme from "./theme"
 import store from "./store"
 import graphqlClient from "./api/graphqlClient"
-import { BrowserRouter, Route, Switch } from "react-router-dom"
-import ProtectedRoute from "./AuthRouting/ProtectedRoute"
-import PrivateRoute from "./AuthRouting/PrivateRoute"
-
-import App from "./components/App"
-import Login from "./components/Authentication/Login"
-import Register from "./components/Authentication/Register"
-import Dashboard from "./components/Dashboard/Dashboard"
-import Logout from "./components/Authentication/Logout"
-import Admin from "./components/Admin/Admin"
+import AppRouter from "./components/Routing/AppRouter"
 
 const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
@@ -35,24 +26,7 @@ ReactDOM.render(
         <ApolloProvider client={graphqlClient}>
             <ThemeProvider theme={theme}>
                 <GlobalStyle />
-                <BrowserRouter>
-                    <Switch>
-                        <ProtectedRoute
-                            component={Dashboard}
-                            path="/dashboard"
-                        />
-                        <PrivateRoute
-                            component={Admin}
-                            path="/admin"
-                            role="ADMIN"
-                        />
-
-                        <Route component={Logout} path="/logout" />
-                        <Route component={Register} path="/signup" />
-                        <Route component={Login} path="/login" />
-                        <Route component={App} path="/" />
-                    </Switch>
-                </BrowserRouter>
+                <AppRouter />
             </ThemeProvider>
         </ApolloProvider>
     </Provider>,
